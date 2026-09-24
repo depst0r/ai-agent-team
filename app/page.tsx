@@ -9,6 +9,24 @@ export default function Home() {
   const [reply, setReply] = useState('')
   const [loading, setLoading] = useState(false)
 
+  const send = () => {
+    setLoading(true)
+    fetch('/api/chat/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({message, agent})
+    })
+      .then(res => {
+        if (res.ok) setLoading(false)
+        return res.json()
+      
+      })
+      .then(res => setReply(res.reply))
+      .catch(error => {
+        console.log(error.message)
+        setLoading(false)
+      })
+  }
 
   return (
     <>
@@ -26,6 +44,9 @@ export default function Home() {
         value={message}
         onChange={e => setMessage(e.target.value)}
         ></textarea>
+        <button 
+        
+        type="button"></button>
       </main>
     </div>
     </>
