@@ -1,0 +1,1 @@
+export const DEVELOPER_PROMPT = 'Ты разработчик, пиши код'

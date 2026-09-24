@@ -1,7 +1,7 @@
-import { DESIGNER_PROMPT } from '@/lib/agents/designer'
+import { getPrompt } from "@/lib/agents";
 
 export async function POST(req: Request) {
-  const { message } = await req.json();
+  const { message, agent } = await req.json();
 
   const response = await fetch('https://text.pollinations.ai/openai', {
     method: 'POST',
@@ -9,14 +9,13 @@ export async function POST(req: Request) {
     body: JSON.stringify({
       model: 'openai',
       messages: [
-        { role: 'system', content: DESIGNER_PROMPT},
+        { role: 'system', content: getPrompt(agent)},
         { role: 'user', content: message }
       ],
     }),
   });
 
   const data = await response.json();
-  console.log('ОТВЕТ:', JSON.stringify(data, null, 2));
 
   if (!data.choices?.[0]?.message?.content) {
     return Response.json({ error: data }, { status: 500 });
