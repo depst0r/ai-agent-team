@@ -23,6 +23,7 @@ export default function Home() {
   .then(res => {
     setReply(res.reply)
     setLoading(false)
+    setMessage('')
   })
   .catch(error => {
     console.error(error.message)
@@ -31,13 +32,13 @@ export default function Home() {
   }
   return (
     <>
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50  dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <div className="flex flex-col flex-1 items-center justify-center bg-slate-900">
+      <main className="flex flex-col w-full max-w-3xl gap-6 p-8 bg-zinc-900 text-zinc-100">
         <h1>Мой первый AI помошник </h1>
         <select value={agent} onChange={e => setAgent(e.target.value)  }>
-          <option value="designer">Дизайнер</option>
-          <option value="developer">Разработчик</option>
-          <option value="tester">Тестировщик</option>
+          <option value="designer" className="bg-zinc-800 text-zinc-100">Дизайнер</option>
+          <option value="developer" className="bg-zinc-800 text-zinc-100">Разработчик</option>
+          <option value="tester" className="bg-zinc-800 text-zinc-100">Тестировщик</option>
         </select>
         <textarea 
         rows={4} 
@@ -48,10 +49,11 @@ export default function Home() {
         <button 
         onClick={() => send()}
         disabled={loading}
+        
         type="button">{loading ? 'Думает...' : 'Отправить'}</button>
         {
           reply && 
-          <div className="reply flex flex-col flex-1 items-center justify-center bg-zinc-50 whitespace-pre-wrap" >{reply}</div>
+          <div className="bg-zinc-800 p-4 whitespace-pre-wrap" >{reply}</div>
         }
         
       </main>
