@@ -1,6 +1,8 @@
 'use client'
+import { CodeBlock } from "@/components/CodeBlock";
 import { useState } from "react";
 import Markdown from 'react-markdown'
+
 
 export default function Home() {
 
@@ -55,7 +57,7 @@ export default function Home() {
         {
           reply && 
           <div className="bg-zinc-800 p-4 whitespace-pre-wrap shadow-[4px_4px_0_0_#000]" >
-            <Markdown>{reply}</Markdown>  
+            <Markdown components={{code: CodeBlock}}>{reply}</Markdown>  
             </div>
         }
         
