@@ -35,12 +35,13 @@ export default function Home() {
     <div className="flex flex-col flex-1 items-center justify-center bg-slate-900">
       <main className="flex flex-col w-full max-w-3xl gap-6 p-8 bg-zinc-900 text-zinc-100">
         <h1>Мой первый AI помошник </h1>
-        <select value={agent} onChange={e => setAgent(e.target.value)  }>
+        <select className="bg-zinc-800 text-zinc-100 border-2 border-zinc-600 p-2 shadow-[4px_4px_0_0_#000]" value={agent} onChange={e => setAgent(e.target.value)}>
           <option value="designer" className="bg-zinc-800 text-zinc-100">Дизайнер</option>
           <option value="developer" className="bg-zinc-800 text-zinc-100">Разработчик</option>
           <option value="tester" className="bg-zinc-800 text-zinc-100">Тестировщик</option>
         </select>
-        <textarea 
+        <textarea
+        className="bg-zinc-800 text-zinc-100 border-2 border-zinc-600 p-2 shadow-[4px_4px_0_0_#000]"
         rows={4} 
         placeholder="Задание для агента" 
         value={message}
@@ -49,11 +50,11 @@ export default function Home() {
         <button 
         onClick={() => send()}
         disabled={loading}
-        
+        className="cursor-pointer bg-zinc-800 text-zinc-100 border-2 border-zinc-600 p-2 active:translate-x-1 active:translate-y-1 disabled:opacity-50 shadow-[4px_4px_0_0_#000]"
         type="button">{loading ? 'Думает...' : 'Отправить'}</button>
         {
           reply && 
-          <div className="bg-zinc-800 p-4 whitespace-pre-wrap" >{reply}</div>
+          <div className="bg-zinc-800 p-4 whitespace-pre-wrap shadow-[4px_4px_0_0_#000]" >{reply}</div>
         }
         
       </main>
