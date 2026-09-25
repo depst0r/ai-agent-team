@@ -17,17 +17,18 @@ export default function Home() {
       body: JSON.stringify({message, agent})
     })
       .then(res => {
-        if (res.ok) setLoading(false)
-        return res.json()
-      
-      })
-      .then(res => setReply(res.reply))
-      .catch(error => {
-        console.log(error.message)
-        setLoading(false)
-      })
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    return res.json();
+  })
+  .then(res => {
+    setReply(res.reply)
+    setLoading(false)
+  })
+  .catch(error => {
+    console.error(error.message)
+    setLoading(false)
+  })
   }
-
   return (
     <>
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50  dark:bg-black">
@@ -45,8 +46,14 @@ export default function Home() {
         onChange={e => setMessage(e.target.value)}
         ></textarea>
         <button 
+        onClick={() => send()}
+        disabled={loading}
+        type="button">{loading ? 'Думает...' : 'Отправить'}</button>
+        {
+          reply && 
+          <div className="reply flex flex-col flex-1 items-center justify-center bg-zinc-50 whitespace-pre-wrap" >{reply}</div>
+        }
         
-        type="button"></button>
       </main>
     </div>
     </>
