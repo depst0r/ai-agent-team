@@ -28,7 +28,7 @@ export default function Home() {
     setMessage('')
   })
   .catch(error => {
-    console.error(error.message)
+    console.error(String(error))
     setLoading(false)
   })
   }
@@ -60,7 +60,6 @@ export default function Home() {
             <Markdown components={{code: CodeBlock}}>{reply}</Markdown>  
             </div>
         }
-        
       </main>
     </div>
     </>
