@@ -56,7 +56,9 @@ export default function Home() {
               if (content) {
                 setReply(prev => prev + content)
               }
-            } catch (e) {}
+            } catch (e) {
+              console.log(e)
+            }
           }
         }
 
@@ -91,7 +93,6 @@ export default function Home() {
             value={message}
             onChange={e => setMessage(e.target.value)}
           />
-
           <button
             onClick={send}
             disabled={loading}
