@@ -1,6 +1,7 @@
 'use client'
 import { CodeBlock } from "@/components/CodeBlock";
 import { useState } from "react";
+import { AgentSelect } from "@/components/AgentSelect";
 import Markdown from 'react-markdown'
 
 export default function Home() {
@@ -76,15 +77,8 @@ export default function Home() {
       <div className="flex flex-col flex-1 items-center justify-center bg-slate-900">
         <main className="flex flex-col w-full max-w-3xl gap-6 p-8 bg-zinc-900 text-zinc-100">
           <h1>AI помошник </h1>
-          <select
-            className="bg-zinc-800 text-zinc-100 border-2 border-zinc-600 p-2 shadow-[4px_4px_0_0_#000] focus:outline-none focus:border-zinc-400"
-            value={agent}
-            onChange={e => setAgent(e.target.value)}
-          >
-            <option value="designer" className="bg-zinc-800 text-zinc-100">Дизайнер</option>
-            <option value="developer" className="bg-zinc-800 text-zinc-100">Разработчик</option>
-            <option value="tester" className="bg-zinc-800 text-zinc-100">Тестировщик</option>
-          </select>
+
+          <AgentSelect onChange={setAgent} value={agent}/>
 
           <textarea
             className="bg-zinc-800 text-zinc-100 border-2 border-zinc-600 p-2 shadow-[4px_4px_0_0_#000] focus:outline-none focus:border-zinc-400"
