@@ -40,7 +40,15 @@ git clone https://github.com/depst0r/ai-agent-team.git
 cd ai-agent-team
 npm install
 npm run dev
+```
 
+Открой [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 📁 Структура проекта
+
+```
 ai-agent-team/
 │
 ├── app/
@@ -65,3 +73,27 @@ ai-agent-team/
 │       └── default.ts       # ⚠️  Fallback для неизвестного агента
 │
 └── README.md
+```
+
+---
+
+## ⚙️ Как это работает
+
+```
+Браузер (page.tsx)
+    ↓ fetch POST /api/chat  { message, agent }
+Сервер (route.ts)
+    ↓ getPrompt(agent) → выбирает промпт
+    ↓ fetch → Pollinations с stream: true
+    ↓ прокидывает поток обратно
+Браузер
+    ↓ читает чанки через getReader()
+    ↓ setReply(prev => prev + content)
+UI обновляется в реальном времени
+```
+
+---
+
+## 📄 Лицензия
+
+MIT
