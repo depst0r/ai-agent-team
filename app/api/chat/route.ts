@@ -8,6 +8,7 @@ export async function POST(req: Request) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model: 'openai',
+      stream: true,
       messages: [
         { role: 'system', content: getPrompt(agent)},
         { role: 'user', content: message }
@@ -15,11 +16,7 @@ export async function POST(req: Request) {
     }),
   });
 
-  const data = await response.json();
-
-  if (!data.choices?.[0]?.message?.content) {
-    return Response.json({ error: data }, { status: 500 });
-  }
-
-  return Response.json({ reply: data.choices[0].message.content });
+  return new Response(response.body, {
+    headers: { 'Content-Type': 'text/event-stream' },
+  })
 }
